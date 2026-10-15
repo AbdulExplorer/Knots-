@@ -26,32 +26,28 @@ export interface SiteConfig {
     supportingText: string;
     primaryCta: string;
     secondaryCta: string;
-    /**
-     * Put the file path to your hero photo or video here when ready.
-     * Example: "/images/hero-wedding.jpg" or "/videos/hero-wedding.mp4"
-     * Leave as "" to show the clean placeholder container.
-     */
-    mediaSrc: string;
-    mediaType: "image" | "video";
-  };
+    primaryCtaTarget: string;
+    secondaryCtaTarget: string;
 
-  weddingJourney: {
-    sectionLabel: string;
-    title: string;
-    subtitle: string;
     /**
-     * Set to true to show the "YOUR WEDDING FILM WILL LIVE HERE" badge.
-     * Turn false when launching in production.
-     */
-    showPlaceholderBadge: boolean;
-    /**
-     * Path to your wedding cinematic video or frame sequence folder.
-     * Example: "/videos/wedding-walkthrough.mp4"
-     * Leave as "" while you do not have video files yet.
+     * =======================================================================
+     * HERO CINEMATIC SCROLL-CONTROLLED MEDIA
+     * =======================================================================
+     * Option A (Video): Put your video path here (e.g., "/videos/wedding-walkthrough.mp4")
+     * Option B (Frames): Put framesPattern and frameCount (e.g., "/frames/seq_%03d.jpg")
+     * 
+     * When left as "", the hero renders an elegant, dark placeholder stage
+     * with real-time scroll progress through the 4 wedding venue zones.
      */
     videoSrc: string;
-    /** The 4 visual story beats as you scroll through the wedding venue */
-    beats: Array<{
+    framesPattern: string;
+    frameCount: number;
+
+    /** Set to true in development to show placeholder guide badge; false for production */
+    showPlaceholderBadge: boolean;
+
+    /** The 4 walkthrough stages that advance as the visitor scrolls the hero */
+    walkthroughStages: Array<{
       step: string;
       title: string;
       description: string;
@@ -129,37 +125,39 @@ export const siteConfig: SiteConfig = {
       "We bring your wedding vision to life through thoughtful planning, extraordinary design, and seamless execution.",
     primaryCta: "PLAN YOUR WEDDING",
     secondaryCta: "DISCOVER OUR APPROACH",
-    // When you have an image or video, paste its path here (e.g. "/images/hero.jpg")
-    mediaSrc: "",
-    mediaType: "image",
-  },
+    primaryCtaTarget: "#inquiry",
+    secondaryCtaTarget: "#approach",
 
-  weddingJourney: {
-    sectionLabel: "THE CINEMATIC WALKTHROUGH",
-    title: "A JOURNEY THROUGH SACRED SPACES",
-    subtitle: "Scroll to step into the wedding venue — from the grand entrance to the radiant mandap.",
-    showPlaceholderBadge: true, // Set to false when ready for final client launch
-    videoSrc: "", // Paste path to video file (e.g. "/videos/journey.mp4") when ready
-    beats: [
+    // =========================================================================
+    // EDIT THIS PATH TO ADD YOUR WEDDING WALKTHROUGH VIDEO:
+    // Place your mp4 in public/videos/wedding-walkthrough.mp4
+    // Then set: videoSrc: "/videos/wedding-walkthrough.mp4"
+    // =========================================================================
+    videoSrc: "",
+    framesPattern: "",
+    frameCount: 0,
+    showPlaceholderBadge: true, // Set to false when launching final client site
+
+    walkthroughStages: [
       {
         step: "01",
-        title: "The Arrival & Grand Threshold",
-        description: "Guests enter through monumental candlelit archways and botanical corridors, leaving the world behind.",
+        title: "The Venue Entrance",
+        description: "Guests cross the threshold through candlelit archways and botanical corridors.",
       },
       {
         step: "02",
-        title: "Floral Installations & Spatial Art",
-        description: "Sculptural jasmine, marigold cascading weaves, and atmospheric amber lanterns framing the courtyards.",
+        title: "Decor & Floral Sculptures",
+        description: "Cascading jasmine installations, textured fabrics, and amber lanterns.",
       },
       {
         step: "03",
-        title: "The Sacred Mandap & Focal Vows",
-        description: "The architectural centerpiece of the wedding, sculpted with sacred symmetry and golden light for the pheras.",
+        title: "The Sacred Mandap",
+        description: "The architectural centerpiece sculpted with golden light for the pheras.",
       },
       {
         step: "04",
-        title: "The Celebration & Midnight Reverie",
-        description: "A wide reveal of the starlit banquet tables, acoustic music, and unforgettable collective euphoria.",
+        title: "The Grand Celebration",
+        description: "A wide reveal of starlit banquet tables, music, and midnight reverie.",
       },
     ],
   },
@@ -178,7 +176,7 @@ export const siteConfig: SiteConfig = {
           "Comprehensive multi-day production schedules",
           "Seamless RSVPs, guest logistics & royal hospitality",
         ],
-        imageSrc: "", // Set to your image path later
+        imageSrc: "", // Set to your image path later, e.g. "/images/planning.jpg"
       },
       {
         id: "decor-scenography",
@@ -258,7 +256,7 @@ export const siteConfig: SiteConfig = {
         caption: "Sacred Mandap Architecture & Floral Canopy",
         category: "Ceremony Scenography",
         aspect: "wide",
-        imageSrc: "", // Add your photo path here
+        imageSrc: "", // Add your photo path here, e.g. "/images/mandap.jpg"
       },
       {
         id: "gal-2",

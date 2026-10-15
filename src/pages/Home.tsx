@@ -1,7 +1,6 @@
 import React from "react";
 import { Navbar } from "../components/Navbar";
 import { Hero } from "../components/Hero";
-import { WeddingJourney } from "../components/WeddingJourney";
 import { Services } from "../components/Services";
 import { Approach } from "../components/Approach";
 import { Gallery } from "../components/Gallery";
@@ -16,26 +15,23 @@ export const Home: React.FC = () => {
       <Navbar />
 
       <main id="main-content">
-        {/* 2. Hero with Headline & Empty Media Stage */}
+        {/* 2. Top Hero Section with Integrated Scroll-Controlled Wedding Walkthrough */}
         <Hero />
 
-        {/* 3. Cinematic Scroll-Controlled Wedding Journey */}
-        <WeddingJourney />
-
-        {/* 4. Luxury Wedding Services & Coordination */}
+        {/* 3. Luxury Wedding Services & Coordination */}
         <Services />
 
-        {/* 5. Our 4-Step Planning Philosophy */}
+        {/* 4. Our 4-Step Planning Philosophy */}
         <Approach />
 
-        {/* 6. Wedding Scenography & Decor Gallery (Empty Placeholders) */}
+        {/* 5. Wedding Scenography & Decor Gallery (Empty Placeholders) */}
         <Gallery />
 
-        {/* 7. Exactly 3-Field Inquiry Form */}
+        {/* 6. Exactly 3-Field Inquiry Form */}
         <InquiryForm />
       </main>
 
-      {/* 8. Minimalist Footer */}
+      {/* 7. Minimalist Footer */}
       <Footer />
     </div>
   );

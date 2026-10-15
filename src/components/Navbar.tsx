@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { siteConfig } from "../config/siteConfig";
 import { Menu, X } from "lucide-react";
+import logo from "../assets/logo.png";
 import "./Navbar.css";
 
 export const Navbar: React.FC = () => {
@@ -30,18 +31,17 @@ export const Navbar: React.FC = () => {
             place it inside this container:
             <img src="/images/logo.svg" alt={siteConfig.brand.name} className="logo-image" />
            ========================================================================= */}
-        <a href="#hero" className="logo-placeholder-container" aria-label={siteConfig.brand.name}>
-          {/* 
-            --- INSERT YOUR LOGO IMAGE BELOW ---
-            Example: <img src="/images/your-logo.svg" alt="Knots by Deva Jain" className="brand-logo-img" />
-          */}
-          <div className="empty-logo-box">
-            {/* The box is intentionally empty for you to place your logo later */}
-            <span className="empty-logo-guide" aria-hidden="true">
-              [ LOGO AREA ]
-            </span>
-          </div>
-        </a>
+        <a
+  href="#hero"
+  className="logo-placeholder-container"
+  aria-label={siteConfig.brand.name}
+>
+  <img
+    src={logo}
+    alt={siteConfig.brand.name}
+    className="brand-logo-img"
+  />
+</a>
 
         {/* Desktop Navigation Links */}
         <nav className="desktop-nav" aria-label="Main Navigation">
