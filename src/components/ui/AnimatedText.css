@@ -1,0 +1,19 @@
+/* Animated Text Styles */
+
+.animated-text-container {
+  display: flex;
+  flex-direction: column;
+  perspective: 1000px;
+}
+
+.animated-text-line-wrapper {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+}
+
+.animated-text-line {
+  display: block;
+  will-change: transform, opacity;
+  transform-origin: top left;
+}

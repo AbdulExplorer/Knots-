@@ -1,0 +1,292 @@
+/* Portfolio Section Styles */
+
+.portfolio-section {
+  position: relative;
+  background-color: var(--color-bg-surface);
+  padding-top: clamp(5rem, 9vw, 9rem);
+  padding-bottom: clamp(5rem, 9vw, 9rem);
+  border-top: 1px solid var(--color-border-subtle);
+  overflow: hidden;
+}
+
+.portfolio-header {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.portfolio-header-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: flex-end;
+}
+
+.portfolio-intro {
+  color: var(--color-text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* Disclaimer Box */
+.portfolio-disclaimer-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1.25rem 1.5rem;
+  background-color: rgba(20, 20, 25, 0.7);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xs);
+  backdrop-filter: blur(8px);
+}
+
+.disclaimer-icon {
+  color: var(--color-accent-gold);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.disclaimer-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.disclaimer-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--color-accent-gold);
+}
+
+.disclaimer-text p {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-text-tertiary);
+  line-height: 1.45;
+}
+
+/* Filter Bar */
+.portfolio-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.portfolio-filter-btn {
+  padding: 0.45rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  transition: all var(--transition-fast);
+}
+
+.portfolio-filter-btn:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-subtle);
+}
+
+.portfolio-filter-btn.active {
+  color: var(--color-accent-gold);
+  border-color: var(--color-accent-gold);
+  background-color: rgba(201, 169, 110, 0.08);
+}
+
+/* Editorial Asymmetric Grid */
+.portfolio-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.portfolio-card {
+  position: relative;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition-fast), transform var(--transition-medium);
+}
+
+.portfolio-card:hover,
+.portfolio-card:focus-visible {
+  border-color: var(--color-accent-gold);
+  transform: translateY(-4px);
+}
+
+.portfolio-card.span-two {
+  grid-column: span 2;
+}
+
+.portfolio-card-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.portfolio-card.aspect-tall .portfolio-card-media {
+  min-height: 440px;
+}
+
+.portfolio-card.aspect-square .portfolio-card-media {
+  min-height: 380px;
+}
+
+.portfolio-card.aspect-wide .portfolio-card-media {
+  min-height: 360px;
+}
+
+.portfolio-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.85s var(--ease-editorial), filter 0.85s ease;
+  filter: brightness(0.85) contrast(1.1);
+}
+
+.portfolio-card:hover .portfolio-card-img {
+  transform: scale(1.06);
+  filter: brightness(0.95) contrast(1.05);
+}
+
+.portfolio-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 11, 0.2) 0%,
+    transparent 40%,
+    rgba(9, 9, 11, 0.9) 100%
+  );
+  transition: opacity 0.4s ease;
+}
+
+.portfolio-card-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 40px rgba(9, 9, 11, 0.6);
+  pointer-events: none;
+}
+
+/* Card Content Overlay */
+.portfolio-card-content {
+  position: absolute;
+  inset: 0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.card-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-category {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  background: rgba(9, 9, 11, 0.75);
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xs);
+  backdrop-filter: blur(6px);
+}
+
+.card-expand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(9, 9, 11, 0.75);
+  border: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: all var(--transition-fast);
+}
+
+.portfolio-card:hover .card-expand-icon {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--color-accent-gold);
+  border-color: var(--color-accent-gold);
+}
+
+.card-bottom-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card-title {
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.card-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+}
+
+.card-spec-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--color-accent-gold);
+  margin-top: 0.4rem;
+  opacity: 0.85;
+}
+
+/* Responsive Portfolio */
+@media (max-width: 1024px) {
+  .portfolio-header-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .portfolio-editorial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .portfolio-card.span-two {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .portfolio-card-media {
+    min-height: 320px;
+  }
+
+  .portfolio-card-content {
+    padding: 1.25rem;
+  }
+}

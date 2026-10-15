@@ -1,0 +1,153 @@
+/* Statement Section Styles */
+
+.statement-section {
+  position: relative;
+  background-color: var(--color-bg-primary);
+  padding-top: clamp(5rem, 10vw, 10rem);
+  padding-bottom: clamp(5rem, 10vw, 10rem);
+  border-top: 1px solid var(--color-border-subtle);
+  overflow: hidden;
+}
+
+.statement-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.statement-year-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--color-text-tertiary);
+}
+
+.statement-headline-block {
+  margin-bottom: clamp(3.5rem, 7vw, 6.5rem);
+  max-width: 1200px;
+}
+
+.statement-title {
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+/* Editorial Asymmetric Grid */
+.statement-editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+
+/* Inset Concept Image */
+.statement-image-frame {
+  position: relative;
+}
+
+.statement-image-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-elevated);
+}
+
+.statement-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: brightness(0.85) contrast(1.1);
+  transition: transform 0.8s var(--ease-editorial), filter 0.8s ease;
+}
+
+.statement-image-inner:hover .statement-img {
+  transform: scale(1.04);
+  filter: brightness(0.95) contrast(1.05);
+}
+
+.statement-image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(0deg, rgba(9, 9, 11, 0.9) 0%, transparent 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.caption-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--color-accent-gold);
+}
+
+.caption-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--color-text-secondary);
+}
+
+/* Text Column */
+.statement-text-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 600px;
+}
+
+.statement-lead {
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+.statement-details-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.statement-body {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.statement-quote-box {
+  padding-left: 1.75rem;
+  border-left: 2px solid var(--color-accent-gold);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.statement-quote {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-style: italic;
+  color: var(--color-accent-gold-light);
+  line-height: 1.4;
+}
+
+.statement-author {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+}
+
+/* Responsive Statement */
+@media (max-width: 900px) {
+  .statement-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .statement-img {
+    aspect-ratio: 16 / 10;
+  }
+}

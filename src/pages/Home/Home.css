@@ -1,0 +1,7 @@
+/* Home Page Styles */
+
+.home-main-flow {
+  position: relative;
+  width: 100%;
+  overflow-x: clip;
+}

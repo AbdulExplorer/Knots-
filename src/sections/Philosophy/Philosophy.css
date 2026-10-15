@@ -1,0 +1,136 @@
+/* Philosophy Section Styles */
+
+.philosophy-section {
+  position: relative;
+  background-color: var(--color-bg-primary);
+  padding-top: clamp(6rem, 12vw, 12rem);
+  padding-bottom: clamp(6rem, 12vw, 12rem);
+  border-top: 1px solid var(--color-border-subtle);
+  overflow: hidden;
+  text-align: center;
+}
+
+.philosophy-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.philosophy-header-center {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.philosophy-statement-wrap {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.philosophy-title {
+  color: var(--color-text-primary);
+  line-height: 1.05;
+}
+
+.philosophy-lead {
+  max-width: 780px;
+  margin: 0 auto clamp(4rem, 8vw, 6rem);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* Sensory Grid */
+.sensory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  text-align: left;
+  margin-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.sensory-card {
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  background: rgba(18, 18, 22, 0.45);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+}
+
+.sensory-card:hover {
+  background: rgba(24, 24, 30, 0.7);
+  border-color: var(--color-border-medium);
+  transform: translateY(-4px);
+}
+
+.sensory-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-xs);
+  background-color: rgba(201, 169, 110, 0.08);
+  border: 1px solid var(--color-border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.sensory-icon {
+  color: var(--color-accent-gold);
+}
+
+.sensory-title {
+  font-size: 1.35rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.sensory-desc {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+/* Signature Block */
+.philosophy-signature-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.signature-line {
+  width: 60px;
+  height: 1px;
+  background-color: var(--color-accent-gold);
+}
+
+.signature-quote {
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  font-style: italic;
+  color: var(--color-accent-gold-light);
+  max-width: 680px;
+  line-height: 1.45;
+}
+
+.signature-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--color-text-tertiary);
+}
+
+/* Responsive Philosophy */
+@media (max-width: 900px) {
+  .sensory-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

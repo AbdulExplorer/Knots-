@@ -1,0 +1,40 @@
+/* Responsive Layout Rules */
+
+/* Mobile Breakpoints (< 768px) */
+@media (max-width: 767px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .site-container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* Disable or hide desktop-only custom cursors */
+  .custom-cursor-container {
+    display: none !important;
+  }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .site-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1025px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* Wide screens (> 1600px) */
+@media (min-width: 1600px) {
+  :root {
+    --container-max-width: 1560px;
+  }
+}
