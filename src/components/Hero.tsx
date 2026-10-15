@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
  * Supports patterns like /images/wedding-journey/f%d.png or frame_%04d.jpg.
  */
 function formatFrameUrl(pattern: string, index: number): string {
+
   if (pattern.includes("%04d")) {
     return pattern.replace("%04d", String(index).padStart(4, "0"));
   }

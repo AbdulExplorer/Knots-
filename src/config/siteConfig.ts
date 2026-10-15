@@ -133,7 +133,7 @@ export const siteConfig: SiteConfig = {
     // =========================================================================
     videoSrc: "",
     framesPattern: "/images/wedding-journey/f%d.png",
-    frameCount: 6,
+    frameCount: 11,
     showPlaceholderBadge: false,
 
     walkthroughStages: [
