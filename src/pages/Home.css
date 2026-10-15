@@ -1,0 +1,15 @@
+/* ==========================================================================
+   HOME PAGE FLOW
+   ========================================================================== */
+
+.home-wrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+}
+
+#main-content {
+  position: relative;
+  width: 100%;
+}
