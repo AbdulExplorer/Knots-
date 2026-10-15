@@ -147,7 +147,7 @@ export const InquiryForm: React.FC = () => {
                     id="name"
                     type="text"
                     className="field-input"
-                    placeholder="e.g. Ananya Singhania"
+                    placeholder="Enter your name"
                     value={formData.name}
                     onChange={(e) => {
                       setFormData({ ...formData, name: e.target.value });
@@ -167,7 +167,7 @@ export const InquiryForm: React.FC = () => {
                     id="phone"
                     type="tel"
                     className="field-input"
-                    placeholder="e.g. +91 98765 43210"
+                    placeholder="Enter your number"
                     value={formData.phone}
                     onChange={(e) => {
                       setFormData({ ...formData, phone: e.target.value });

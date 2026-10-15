@@ -113,7 +113,7 @@ export const siteConfig: SiteConfig = {
   },
 
   hero: {
-    eyebrow: "THOUGHTFULLY PLANNED. BEAUTIFULLY REMEMBERED.",
+    eyebrow: "",
     headline: {
       line1: "Your Story.",
       line2: "Our Craft.",
@@ -295,8 +295,8 @@ export const siteConfig: SiteConfig = {
   },
 
   contact: {
-    email: "weddings@knotsbydevajain.com",
-    whatsappNumber: "+919876543210", // Replace with your actual WhatsApp number
+    email: "******@knotsbydevajain.com",
+    whatsappNumber: "**********", // Replace with your actual WhatsApp number
     whatsappMessage: "Hello Knots by Deva Jain team, I would like to inquire about wedding planning services.",
     successMessage: "Thank you! We have received your wedding inquiry and will reach out within 24 hours.",
   },

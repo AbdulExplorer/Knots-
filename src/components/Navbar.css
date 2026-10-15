@@ -51,6 +51,13 @@
   height: auto;
   object-fit: contain;
   padding-top: 10px;
+  transition: none;
+}
+
+.brand-logo-img:hover
+{
+  filter: sepia(10) saturate(6) hue-rotate(20deg)
+          brightness(1.1) contrast(1.1);
 }
 
 

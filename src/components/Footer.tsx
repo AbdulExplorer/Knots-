@@ -93,7 +93,7 @@ export const Footer: React.FC = () => {
             className="footer-back-to-top"
             aria-label="Back to top"
           >
-            <span>Develop by Abdul Ali</span>
+            <span>Design & Developed by Abdul Ali</span>
             <ArrowUp size={14} />
           </button>
         </div>
