@@ -33,11 +33,18 @@
   overflow: hidden;
 }
 
-.hero-video-element,
-.hero-canvas-element {
+.hero-video-element {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.hero-canvas-element {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
@@ -134,10 +141,10 @@
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(9, 9, 11, 0.75) 0%,
-    rgba(9, 9, 11, 0.45) 45%,
-    rgba(9, 9, 11, 0.85) 85%,
-    rgba(9, 9, 11, 1) 100%
+    rgba(9, 9, 11, 0.62) 0%,
+    rgba(9, 9, 11, 0.22) 40%,
+    rgba(9, 9, 11, 0.48) 75%,
+    rgba(9, 9, 11, 0.85) 100%
   );
 }
 

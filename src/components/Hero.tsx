@@ -7,6 +7,26 @@ import "./Hero.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * Helper function to format frame sequence URL.
+ * Supports patterns like /images/wedding-journey/f%d.png or frame_%04d.jpg.
+ */
+function formatFrameUrl(pattern: string, index: number): string {
+  if (pattern.includes("%04d")) {
+    return pattern.replace("%04d", String(index).padStart(4, "0"));
+  }
+  if (pattern.includes("%03d")) {
+    return pattern.replace("%03d", String(index).padStart(3, "0"));
+  }
+  if (pattern.includes("%02d")) {
+    return pattern.replace("%02d", String(index).padStart(2, "0"));
+  }
+  if (pattern.includes("%d")) {
+    return pattern.replace("%d", String(index));
+  }
+  return pattern;
+}
+
 export const Hero: React.FC = () => {
   const { hero, brand } = siteConfig;
 
@@ -16,106 +36,164 @@ export const Hero: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Scroll state
+  // Track the current active frame index across renders & async callbacks
+  const activeFrameRef = useRef<number>(0);
+
+  // Scroll state for progress bar & walkthrough stage text
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeStageIndex, setActiveStageIndex] = useState(0);
 
-  // Setup GSAP ScrollTrigger for the hero background walkthrough
   useEffect(() => {
     const wrapper = scrollWrapperRef.current;
     const pinned = pinnedViewportRef.current;
     if (!wrapper || !pinned) return;
 
-    // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
     const video = videoRef.current;
     const canvas = canvasRef.current;
     const totalFrames = hero.frameCount;
 
-    // Optional Frame sequence cache
+    // Cache of loaded HTMLImageElement instances
     const frameImages: HTMLImageElement[] = [];
-    if (canvas && totalFrames > 0 && hero.framesPattern) {
-      // Preload first batch of frames for smooth rendering
-      const loadCount = Math.min(totalFrames, 30);
-      for (let i = 1; i <= loadCount; i++) {
-        const img = new Image();
-        const formattedNum = String(i).padStart(4, "0");
-        img.src = hero.framesPattern.replace("%04d", formattedNum);
-        frameImages.push(img);
-      }
-    }
 
-    // Draw frame to canvas helper
+    /**
+     * Render a frame to canvas with high-DPI support and aspect-ratio cover crop.
+     */
     const renderFrame = (frameIndex: number) => {
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d");
+      const currentCanvas = canvasRef.current;
+      if (!currentCanvas) return;
+
+      const ctx = currentCanvas.getContext("2d");
       if (!ctx) return;
 
-      const img = frameImages[frameIndex];
-      if (img && img.complete) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // Draw centered with cover aspect ratio
-        const hRatio = canvas.width / img.width;
-        const vRatio = canvas.height / img.height;
-        const ratio = Math.max(hRatio, vRatio);
-        const centerShiftX = (canvas.width - img.width * ratio) / 2;
-        const centerShiftY = (canvas.height - img.height * ratio) / 2;
-        ctx.drawImage(
-          img,
-          0,
-          0,
-          img.width,
-          img.height,
-          centerShiftX,
-          centerShiftY,
-          img.width * ratio,
-          img.height * ratio
-        );
+      // Prefer requested frame, or fallback to closest loaded frame so canvas is never black
+      let img = frameImages[frameIndex];
+      if (!img || !img.complete || !img.naturalWidth) {
+        for (let offset = 1; offset < totalFrames; offset++) {
+          const prev = frameImages[frameIndex - offset];
+          if (prev && prev.complete && prev.naturalWidth) {
+            img = prev;
+            break;
+          }
+          const next = frameImages[frameIndex + offset];
+          if (next && next.complete && next.naturalWidth) {
+            img = next;
+            break;
+          }
+        }
       }
+
+      if (!img || !img.complete || !img.naturalWidth || !img.naturalHeight) return;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const displayWidth = currentCanvas.clientWidth || window.innerWidth || 1920;
+      const displayHeight = currentCanvas.clientHeight || window.innerHeight || 1080;
+
+      const targetWidth = Math.round(displayWidth * dpr);
+      const targetHeight = Math.round(displayHeight * dpr);
+
+      if (currentCanvas.width !== targetWidth || currentCanvas.height !== targetHeight) {
+        currentCanvas.width = targetWidth;
+        currentCanvas.height = targetHeight;
+      }
+
+      // Calculate cover scale: image covers the full canvas without distortion
+      const scale = Math.max(
+        currentCanvas.width / img.naturalWidth,
+        currentCanvas.height / img.naturalHeight
+      );
+
+      const drawWidth = Math.round(img.naturalWidth * scale);
+      const drawHeight = Math.round(img.naturalHeight * scale);
+      const offsetX = Math.round((currentCanvas.width - drawWidth) / 2);
+      const offsetY = Math.round((currentCanvas.height - drawHeight) / 2);
+
+      ctx.clearRect(0, 0, currentCanvas.width, currentCanvas.height);
+      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     };
 
-    // Responsive scroll distance (shorter on mobile for natural scrolling)
-    const isMobile = window.innerWidth <= 768;
-    const scrollDistance = isMobile ? 1200 : 2000;
+    // Load all frame images if frame sequence is configured
+    if (canvas && totalFrames > 0 && hero.framesPattern) {
+      for (let i = 1; i <= totalFrames; i++) {
+        const img = new Image();
+        const frameIdx = i - 1;
 
-    // Create the pinned ScrollTrigger for the Hero
-    const trigger = ScrollTrigger.create({
-      trigger: wrapper,
-      start: "top top",
-      end: `+=${scrollDistance}`,
-      pin: pinned,
-      pinSpacing: true,
-      scrub: 0.6, // Smooth cinematic scrub physics
-      onUpdate: (self) => {
-        const progress = self.progress; // 0.0 to 1.0
-        setScrollProgress(Math.round(progress * 100));
+        img.onload = () => {
+          // If this loaded frame is the one currently selected by scroll, draw it immediately!
+          if (activeFrameRef.current === frameIdx) {
+            renderFrame(frameIdx);
+          }
+        };
 
-        // Update active walkthrough stage (0 to 3)
-        const stageCount = hero.walkthroughStages.length;
-        const currentStage = Math.min(Math.floor(progress * stageCount), stageCount - 1);
-        setActiveStageIndex(currentStage);
+        img.onerror = () => {
+          console.error(`Failed to load wedding frame ${i}: ${img.src}`);
+        };
 
-        // CASE 1: Video scrub mode
-        if (video && video.duration) {
-          video.currentTime = progress * video.duration;
+        img.src = formatFrameUrl(hero.framesPattern, i);
+        frameImages.push(img);
+
+        // If the image was already cached by the browser, draw initial frame immediately
+        if (img.complete && img.naturalWidth > 0 && activeFrameRef.current === frameIdx) {
+          renderFrame(frameIdx);
         }
+      }
 
-        // CASE 2: Frame sequence scrub mode
-        if (canvas && totalFrames > 0) {
-          const frameIndex = Math.min(
-            Math.floor(progress * (totalFrames - 1)),
-            totalFrames - 1
-          );
-          renderFrame(frameIndex);
-        }
-      },
-    });
+      // Initial draw attempt for frame 0
+      renderFrame(0);
+    }
+
+    // Window resize handler: redraw active frame at new canvas dimensions
+    const handleResize = () => {
+      renderFrame(activeFrameRef.current);
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Setup ScrollTrigger scrubbing only if reduced motion is not preferred
+    let trigger: ScrollTrigger | null = null;
+
+    if (!prefersReducedMotion) {
+      const isMobile = window.innerWidth <= 768;
+      const scrollDistance = isMobile ? 1200 : 2000;
+
+      trigger = ScrollTrigger.create({
+        trigger: wrapper,
+        start: "top top",
+        end: `+=${scrollDistance}`,
+        pin: pinned,
+        pinSpacing: true,
+        scrub: 0.5, // Responsive, smooth scrub
+        onUpdate: (self) => {
+          const progress = self.progress; // 0.0 to 1.0
+          setScrollProgress(Math.round(progress * 100));
+
+          // Map scroll to 4 walkthrough stages (Entrance -> Decor -> Mandap -> Celebration)
+          const stageCount = hero.walkthroughStages.length;
+          const currentStage = Math.min(Math.floor(progress * stageCount), stageCount - 1);
+          setActiveStageIndex(currentStage);
+
+          // CASE 1: Video scrub mode (if videoSrc configured)
+          if (video && video.duration) {
+            video.currentTime = progress * video.duration;
+          }
+
+          // CASE 2: Frame sequence mode (if frame images configured)
+          if (canvas && totalFrames > 0) {
+            const frameIndex = Math.min(
+              Math.floor(progress * totalFrames),
+              totalFrames - 1
+            );
+            activeFrameRef.current = frameIndex;
+            renderFrame(frameIndex);
+          }
+        },
+      });
+    }
 
     return () => {
-      // Clean up ScrollTrigger instance on unmount
-      trigger.kill();
+      if (trigger) trigger.kill();
+      window.removeEventListener("resize", handleResize);
     };
   }, [hero.frameCount, hero.framesPattern, hero.videoSrc, hero.walkthroughStages.length]);
 
@@ -141,12 +219,11 @@ export const Hero: React.FC = () => {
               className="hero-video-element"
             />
           ) : hero.frameCount > 0 && hero.framesPattern ? (
-            /* Option B: Canvas element for frame sequence */
+            /* Option B: Canvas element for frame sequence (images f1.png to f6.png) */
             <canvas ref={canvasRef} className="hero-canvas-element" />
           ) : (
             /* Option C: Clean empty cinematic dark stage */
             <div className="hero-empty-stage">
-              {/* Subtle ambient lighting that breathes with scroll progress */}
               <div
                 className="hero-ambient-light"
                 style={{
@@ -155,7 +232,6 @@ export const Hero: React.FC = () => {
                 }}
               />
 
-              {/* Developer guidance badge (toggle off in siteConfig.ts) */}
               {hero.showPlaceholderBadge && (
                 <div className="hero-stage-badge">
                   <Film size={13} className="stage-badge-icon" />
@@ -163,7 +239,6 @@ export const Hero: React.FC = () => {
                 </div>
               )}
 
-              {/* Architectural corner marks */}
               <div className="hero-corner top-left" aria-hidden="true" />
               <div className="hero-corner top-right" aria-hidden="true" />
               <div className="hero-corner bottom-left" aria-hidden="true" />
@@ -174,6 +249,7 @@ export const Hero: React.FC = () => {
 
         {/* =======================================================================
             LAYER 2 (MIDDLE): DARK READABILITY OVERLAY & VIGNETTE
+            Calibrated so background images remain vivid & clear while text is crisp.
             ======================================================================= */}
         <div className="hero-dark-overlay" aria-hidden="true" />
 

@@ -42,8 +42,6 @@ export interface SiteConfig {
     videoSrc: string;
     framesPattern: string;
     frameCount: number;
-
-    /** Set to true in development to show placeholder guide badge; false for production */
     showPlaceholderBadge: boolean;
 
     /** The 4 walkthrough stages that advance as the visitor scrolls the hero */
@@ -134,9 +132,9 @@ export const siteConfig: SiteConfig = {
     // Then set: videoSrc: "/videos/wedding-walkthrough.mp4"
     // =========================================================================
     videoSrc: "",
-    framesPattern: "",
-    frameCount: 0,
-    showPlaceholderBadge: true, // Set to false when launching final client site
+    framesPattern: "/images/wedding-journey/f%d.png",
+    frameCount: 6,
+    showPlaceholderBadge: false,
 
     walkthroughStages: [
       {
