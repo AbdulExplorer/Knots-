@@ -1,32 +1,46 @@
 /* ==========================================================================
-   DESIGN VARIABLES & BRAND THEME
-   You can easily change the primary colors, fonts, and spacing here.
+   DESIGN VARIABLES & CURATED THEME PALETTES — KNOTS BY DEVA JAIN
+   Luxury Indian Wedding Planning & Spatial Scenography
    ========================================================================== */
 
 :root {
-  /* Background Colors — Deep Charcoal & Ink */
-  --bg-primary: #09090b;
-  --bg-secondary: #111115;
-  --bg-card: #17171d;
-  --bg-card-hover: #1f1f26;
-  --bg-overlay: rgba(9, 9, 11, 0.88);
+  /* Default: Theme 1 — Ivory & Champagne */
+  --bg-primary: #FAF8F3;
+  --bg-secondary: #F3EFE6;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8F5EE;
+  --bg-overlay: rgba(250, 248, 243, 0.94);
 
-  /* Typography Colors — Warm Ivory & Muted Tones */
-  --text-primary: #f6f3ec;   /* Warm Ivory for headlines & primary copy */
-  --text-secondary: #9f9a91; /* Soft Warm Gray for body copy */
-  --text-muted: #646059;     /* Subtle Gray for labels & metadata */
-  --text-inverse: #09090b;   /* Dark text for contrast on accent buttons */
+  /* Typography Colors — High Contrast & Refined */
+  --text-primary: #393630;
+  --text-secondary: #656157;
+  --text-muted: #8E897E;
+  --text-inverse: #FFFFFF;
 
-  /* Champagne & Amber Accent Colors */
-  --color-accent: #c8a86b;       /* Restrained Champagne Gold */
-  --color-accent-light: #dfc491; /* Hover State Champagne */
-  --color-accent-dark: #9e7f45;
-  --color-accent-glow: rgba(200, 168, 107, 0.18);
+  /* Accent Tones */
+  --color-accent: #B89B72;
+  --color-accent-secondary: #D8C3A5;
+  --color-accent-light: #C9B08B;
+  --color-accent-dark: #987C55;
+  --color-accent-glow: rgba(184, 155, 114, 0.16);
 
   /* Borders & Dividers */
-  --border-subtle: rgba(246, 243, 236, 0.09);
-  --border-medium: rgba(246, 243, 236, 0.18);
-  --border-accent: rgba(200, 168, 107, 0.35);
+  --border-subtle: rgba(184, 155, 114, 0.22);
+  --border-medium: rgba(184, 155, 114, 0.42);
+  --border-accent: #B89B72;
+
+  /* Logo filter for light surfaces */
+  --logo-filter: brightness(0.2) contrast(1.15);
+
+  /* Media Placeholders */
+  --placeholder-bg: #F4EFE6;
+  --placeholder-border: rgba(184, 155, 114, 0.35);
+  --placeholder-text: #7C776D;
+
+  /* Shadows for luxury depth on light backgrounds */
+  --shadow-card: 0 4px 20px rgba(57, 54, 48, 0.05);
+  --shadow-card-hover: 0 10px 32px rgba(57, 54, 48, 0.1);
+  --shadow-nav: 0 4px 24px rgba(57, 54, 48, 0.06);
 
   /* Fonts */
   --font-serif: 'Cormorant Garamond', Garamond, Georgia, serif;
@@ -34,16 +48,166 @@
   --font-mono: 'Space Mono', monospace;
 
   /* Layout Spacing */
-  --container-max: 1240px;
-  --container-padding: clamp(1.25rem, 4vw, 3rem);
+  --container-max: 1440px;
+  --container-padding: clamp(1rem, 2vw, 1.5rem);
   --nav-height: 80px;
-
-  /* Media Placeholders (When you haven't uploaded photos/videos yet) */
-  --placeholder-bg: #141419;
-  --placeholder-border: rgba(200, 168, 107, 0.22);
-  --placeholder-text: #8e8a82;
 
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   THEME 1: IVORY & CHAMPAGNE
+   ========================================================================== */
+[data-theme="ivory-champagne"] {
+  --bg-primary: #FAF8F3;
+  --bg-secondary: #F3EFE6;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8F5EE;
+  --bg-overlay: rgba(250, 248, 243, 0.94);
+
+  --text-primary: #393630;
+  --text-secondary: #656157;
+  --text-muted: #8E897E;
+  --text-inverse: #FFFFFF;
+
+  --color-accent: #B89B72;
+  --color-accent-secondary: #D8C3A5;
+  --color-accent-light: #C9B08B;
+  --color-accent-dark: #987C55;
+  --color-accent-glow: rgba(184, 155, 114, 0.16);
+
+  --border-subtle: rgba(184, 155, 114, 0.22);
+  --border-medium: rgba(184, 155, 114, 0.42);
+  --border-accent: #B89B72;
+
+  --logo-filter: brightness(0.2) contrast(1.15);
+  --placeholder-bg: #F4EFE6;
+  --placeholder-border: rgba(184, 155, 114, 0.35);
+  --placeholder-text: #7C776D;
+}
+
+/* ==========================================================================
+   THEME 2: BLUSH & SAGE
+   ========================================================================== */
+[data-theme="blush-sage"] {
+  --bg-primary: #FFF9F6;
+  --bg-secondary: #F7EEE8;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FCF4EF;
+  --bg-overlay: rgba(255, 249, 246, 0.94);
+
+  --text-primary: #393633;
+  --text-secondary: #65615C;
+  --text-muted: #8E8883;
+  --text-inverse: #FFFFFF;
+
+  --color-accent: #A7B5A0;
+  --color-accent-secondary: #E8CFCB;
+  --color-accent-light: #B8C5B2;
+  --color-accent-dark: #81917A;
+  --color-accent-glow: rgba(167, 181, 160, 0.2);
+
+  --border-subtle: rgba(167, 181, 160, 0.28);
+  --border-medium: rgba(167, 181, 160, 0.48);
+  --border-accent: #A7B5A0;
+
+  --logo-filter: brightness(0.2) contrast(1.15);
+  --placeholder-bg: #F5EAE4;
+  --placeholder-border: rgba(167, 181, 160, 0.35);
+  --placeholder-text: #78736E;
+}
+
+/* ==========================================================================
+   THEME 3: BEIGE & TAUPE
+   ========================================================================== */
+[data-theme="beige-taupe"] {
+  --bg-primary: #F5F0E8;
+  --bg-secondary: #ECE5DC;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8F5EE;
+  --bg-overlay: rgba(245, 240, 232, 0.94);
+
+  --text-primary: #393530;
+  --text-secondary: #645F59;
+  --text-muted: #8B857E;
+  --text-inverse: #FFFFFF;
+
+  --color-accent: #8A7D70;
+  --color-accent-secondary: #D8CBBB;
+  --color-accent-light: #9E9184;
+  --color-accent-dark: #6D6155;
+  --color-accent-glow: rgba(138, 125, 112, 0.2);
+
+  --border-subtle: rgba(138, 125, 112, 0.24);
+  --border-medium: rgba(138, 125, 112, 0.45);
+  --border-accent: #8A7D70;
+
+  --logo-filter: brightness(0.2) contrast(1.15);
+  --placeholder-bg: #EAE3D7;
+  --placeholder-border: rgba(138, 125, 112, 0.35);
+  --placeholder-text: #746F68;
+}
+
+/* ==========================================================================
+   THEME 4: DUSTY ROSE
+   ========================================================================== */
+[data-theme="dusty-rose"] {
+  --bg-primary: #FBF6F5;
+  --bg-secondary: #F3EBEA;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FCF3F2;
+  --bg-overlay: rgba(251, 246, 245, 0.94);
+
+  --text-primary: #3D3335;
+  --text-secondary: #685A5D;
+  --text-muted: #918285;
+  --text-inverse: #FFFFFF;
+
+  --color-accent: #A77C83;
+  --color-accent-secondary: #D8B3B8;
+  --color-accent-light: #B88E95;
+  --color-accent-dark: #8B6168;
+  --color-accent-glow: rgba(167, 124, 131, 0.2);
+
+  --border-subtle: rgba(167, 124, 131, 0.25);
+  --border-medium: rgba(167, 124, 131, 0.45);
+  --border-accent: #A77C83;
+
+  --logo-filter: brightness(0.22) contrast(1.15);
+  --placeholder-bg: #EFE4E4;
+  --placeholder-border: rgba(167, 124, 131, 0.35);
+  --placeholder-text: #7C6E71;
+}
+
+/* ==========================================================================
+   THEME 5: SAGE & IVORY
+   ========================================================================== */
+[data-theme="sage-ivory"] {
+  --bg-primary: #F8F8F0;
+  --bg-secondary: #EDEDE2;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F5F5EC;
+  --bg-overlay: rgba(248, 248, 240, 0.94);
+
+  --text-primary: #34372F;
+  --text-secondary: #5D6256;
+  --text-muted: #858B7D;
+  --text-inverse: #FFFFFF;
+
+  --color-accent: #78836B;
+  --color-accent-secondary: #C7CFB8;
+  --color-accent-light: #8B977D;
+  --color-accent-dark: #5F6A53;
+  --color-accent-glow: rgba(120, 131, 107, 0.2);
+
+  --border-subtle: rgba(120, 131, 107, 0.25);
+  --border-medium: rgba(120, 131, 107, 0.45);
+  --border-accent: #78836B;
+
+  --logo-filter: brightness(0.2) contrast(1.15);
+  --placeholder-bg: #E7E7D9;
+  --placeholder-border: rgba(120, 131, 107, 0.35);
+  --placeholder-text: #6E7466;
 }

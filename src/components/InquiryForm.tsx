@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { siteConfig } from "../config/siteConfig";
-import { Send, MessageCircle, CheckCircle, Phone, Sparkles } from "lucide-react";
+import { Send, MessageCircle, CheckCircle, Phone, Mail } from "lucide-react";
 import "./InquiryForm.css";
 
 interface FormData {
@@ -18,7 +18,6 @@ interface FormErrors {
 export const InquiryForm: React.FC = () => {
   const { contact } = siteConfig;
 
-  // The 3 required form fields
   const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
@@ -29,7 +28,6 @@ export const InquiryForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Simple, beginner-friendly validation for exactly 3 fields
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
@@ -37,14 +35,13 @@ export const InquiryForm: React.FC = () => {
       newErrors.name = "Please enter your name.";
     }
 
-    // Check that phone has at least 7 digits
     const cleanPhone = formData.phone.replace(/[^0-9+]/g, "");
     if (!cleanPhone || cleanPhone.length < 7) {
       newErrors.phone = "Please enter a valid phone or WhatsApp number.";
     }
 
     if (!formData.notes.trim() || formData.notes.trim().length < 5) {
-      newErrors.notes = "Please tell us a few words about your upcoming wedding.";
+      newErrors.notes = "Please share a few words about your upcoming wedding.";
     }
 
     setErrors(newErrors);
@@ -56,15 +53,12 @@ export const InquiryForm: React.FC = () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-
-    // Simulate sending brief to local demo state
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
     }, 600);
   };
 
-  // Helper to open WhatsApp with pre-filled message
   const getWhatsAppLink = () => {
     const phone = contact.whatsappNumber.replace(/[^0-9]/g, "");
     const text = encodeURIComponent(
@@ -74,44 +68,29 @@ export const InquiryForm: React.FC = () => {
   };
 
   return (
-    <section id="inquiry" className="inquiry-section section-padding" aria-label="Wedding Inquiry Form">
+    <section id="contact" className="inquiry-section section-padding" aria-label="Contact Atelier">
+      {/* Anchor support for both #contact and #inquiry */}
+      <div id="inquiry" tabIndex={-1} style={{ position: "relative", top: "-80px" }} />
+
       <div className="container">
-        
-        {/* Header Block */}
-        <div className="inquiry-header">
-          <span className="section-eyebrow">BEGIN THE CONVERSATION</span>
-          <h2 className="heading-section inquiry-title">
-            PLAN YOUR WEDDING WITH US
-          </h2>
-          <p className="inquiry-subtitle">
-            Share a few initial details and our wedding director will connect with you to discuss dates, venues, and decor visions.
-          </p>
+        {/* Minimal Section Header */}
+        <div className="section-header-minimal">
+          <h2 className="heading-section section-title">{contact.title}</h2>
+          <p className="section-subtitle">{contact.subtitle}</p>
         </div>
 
-        {/* 2-Column Layout: Form + Direct WhatsApp/Phone Concierge */}
-        <div className="inquiry-grid">
-          
-          {/* Column 1: Exactly 3-Field Inquiry Form */}
-          <div className="inquiry-form-card">
+        {/* 2-Column Minimal Layout: Form & Direct Contact */}
+        <div className="inquiry-layout">
+          {/* Form Column */}
+          <div className="inquiry-form-container">
             {isSubmitted ? (
-              // Honest Local Confirmation State
-              <div className="inquiry-success-box" role="status">
-                <div className="success-icon-wrap">
-                  <CheckCircle size={32} className="success-icon" />
-                </div>
-                <h3 className="success-heading heading-sub">Inquiry Recorded</h3>
-                <p className="success-text">
-                  Thank you, <strong className="text-italic-accent">{formData.name}</strong>. Your wedding vision has been recorded in this local preview.
+              <div className="inquiry-success-state" role="status">
+                <CheckCircle size={32} className="success-icon" />
+                <h3 className="success-title heading-sub">Inquiry Recorded</h3>
+                <p className="success-msg">
+                  Thank you, <strong>{formData.name}</strong>. Your wedding inquiry has been recorded.
                 </p>
-
-                {/* Honest note explaining backend is not connected yet */}
-                <div className="demo-notice">
-                  <p>
-                    <strong>Local Demo Notice:</strong> This preview is not yet linked to an external database or server. To send your message immediately, click below to chat on WhatsApp:
-                  </p>
-                </div>
-
-                <div className="success-action-row">
+                <div className="success-actions">
                   <a
                     href={getWhatsAppLink()}
                     target="_blank"
@@ -121,27 +100,23 @@ export const InquiryForm: React.FC = () => {
                     <MessageCircle size={16} />
                     <span>SEND DIRECTLY VIA WHATSAPP</span>
                   </a>
-
                   <button
                     type="button"
                     onClick={() => {
                       setIsSubmitted(false);
                       setFormData({ name: "", phone: "", notes: "" });
                     }}
-                    className="reset-btn"
+                    className="btn btn-outline"
                   >
-                    Submit another message
+                    Submit another inquiry
                   </button>
                 </div>
               </div>
             ) : (
-              // The 3-field form
-              <form onSubmit={handleSubmit} noValidate className="wedding-form">
-                
-                {/* FIELD 1: Name */}
-                <div className={`form-field ${errors.name ? "error" : ""}`}>
+              <form onSubmit={handleSubmit} noValidate className="minimal-wedding-form">
+                <div className={`form-group ${errors.name ? "has-error" : ""}`}>
                   <label htmlFor="name" className="field-label">
-                    1. Your Name <span className="req">*</span>
+                    Your Name
                   </label>
                   <input
                     id="name"
@@ -153,114 +128,97 @@ export const InquiryForm: React.FC = () => {
                       setFormData({ ...formData, name: e.target.value });
                       if (errors.name) setErrors({ ...errors, name: undefined });
                     }}
-                    aria-invalid={!!errors.name}
                   />
-                  {errors.name && <span className="field-error-text">{errors.name}</span>}
+                  {errors.name && <span className="field-error">{errors.name}</span>}
                 </div>
 
-                {/* FIELD 2: Phone number */}
-                <div className={`form-field ${errors.phone ? "error" : ""}`}>
+                <div className={`form-group ${errors.phone ? "has-error" : ""}`}>
                   <label htmlFor="phone" className="field-label">
-                    2. Phone / WhatsApp Number <span className="req">*</span>
+                    Phone / WhatsApp Number
                   </label>
                   <input
                     id="phone"
                     type="tel"
                     className="field-input"
-                    placeholder="Enter your number"
+                    placeholder="Enter phone or WhatsApp number"
                     value={formData.phone}
                     onChange={(e) => {
                       setFormData({ ...formData, phone: e.target.value });
                       if (errors.phone) setErrors({ ...errors, phone: undefined });
                     }}
-                    aria-invalid={!!errors.phone}
                   />
-                  {errors.phone && <span className="field-error-text">{errors.phone}</span>}
+                  {errors.phone && <span className="field-error">{errors.phone}</span>}
                 </div>
 
-                {/* FIELD 3: Tell us about your wedding */}
-                <div className={`form-field ${errors.notes ? "error" : ""}`}>
+                <div className={`form-group ${errors.notes ? "has-error" : ""}`}>
                   <label htmlFor="notes" className="field-label">
-                    3. Tell Us About Your Wedding <span className="req">*</span>
+                    Wedding Vision
                   </label>
                   <textarea
                     id="notes"
                     rows={4}
                     className="field-textarea"
-                    placeholder="Desired wedding city, tentative dates or season, guest count, or any decor dreams you have in mind..."
+                    placeholder="City, dates, estimated guest count, or decor dreams..."
                     value={formData.notes}
                     onChange={(e) => {
                       setFormData({ ...formData, notes: e.target.value });
                       if (errors.notes) setErrors({ ...errors, notes: undefined });
                     }}
-                    aria-invalid={!!errors.notes}
                   />
-                  {errors.notes && <span className="field-error-text">{errors.notes}</span>}
+                  {errors.notes && <span className="field-error">{errors.notes}</span>}
                 </div>
 
-                {/* Submit Button */}
-                <div className="form-submit-row">
-                  <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                    <span>{isSubmitting ? "RECORDING INQUIRY..." : "SEND INQUIRY"}</span>
-                    <Send size={15} />
-                  </button>
-                  <span className="form-privacy-hint">Strictly discrete and confidential.</span>
-                </div>
-
+                <button type="submit" className="btn btn-primary submit-btn" disabled={isSubmitting}>
+                  <span>{isSubmitting ? "RECORDING..." : "SEND INQUIRY"}</span>
+                  <Send size={15} />
+                </button>
               </form>
             )}
           </div>
 
-          {/* Column 2: Direct Concierge & Contact Card */}
-          <div className="inquiry-contact-card">
-            <span className="contact-card-eyebrow">WEDDING CONCIERGE</span>
-            <h3 className="contact-card-title heading-sub">
-              Prefer Immediate Direct Conversation?
-            </h3>
-            <p className="contact-card-text">
-              Reach our private wedding desk directly via WhatsApp or call to check date availability for your celebrations.
+          {/* Direct Concierge Column */}
+          <div className="inquiry-direct-info">
+            <h3 className="direct-title heading-sub">Direct Inquiries</h3>
+            <p className="direct-desc">
+              For date availability, destination scouting, or immediate conversations, reach our atelier desk directly.
             </p>
 
-            <div className="contact-methods">
+            <div className="direct-links-list">
               <a
                 href={`https://wa.me/${contact.whatsappNumber.replace(/[^0-9]/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contact-method-item"
+                className="direct-link-item"
               >
-                <MessageCircle size={18} className="contact-method-icon" />
+                <MessageCircle size={18} className="direct-link-icon" />
                 <div>
-                  <span className="contact-method-label">WHATSAPP DIRECT</span>
-                  <span className="contact-method-val">{contact.whatsappNumber}</span>
+                  <span className="direct-link-label">WhatsApp</span>
+                  <span className="direct-link-value">{contact.whatsappNumber}</span>
                 </div>
               </a>
 
-              <a href={`tel:${contact.whatsappNumber}`} className="contact-method-item">
-                <Phone size={18} className="contact-method-icon" />
+              <a href={`tel:${contact.phone}`} className="direct-link-item">
+                <Phone size={18} className="direct-link-icon" />
                 <div>
-                  <span className="contact-method-label">CALL WEDDING ATELIER</span>
-                  <span className="contact-method-val">{contact.whatsappNumber}</span>
+                  <span className="direct-link-label">Direct Atelier Phone</span>
+                  <span className="direct-link-value">{contact.phone}</span>
                 </div>
               </a>
 
-              <div className="contact-method-item">
-                <Sparkles size={18} className="contact-method-icon" />
+              <a href={`mailto:${contact.email}`} className="direct-link-item">
+                <Mail size={18} className="direct-link-icon" />
                 <div>
-                  <span className="contact-method-label">AVAILABILITY</span>
-                  <span className="contact-method-val">{siteConfig.brand.availability}</span>
+                  <span className="direct-link-label">Email</span>
+                  <span className="direct-link-value">{contact.email}</span>
                 </div>
-              </div>
+              </a>
             </div>
 
-            <div className="contact-quote">
-              <p className="text-italic-accent">
-                "We accept a limited number of weddings each season to guarantee total creative devotion to every bride, groom, and family."
-              </p>
-            </div>
+            <p className="confidentiality-note">
+              Every commission is treated with complete privacy and discretion.
+            </p>
           </div>
-
         </div>
-
       </div>
     </section>
   );

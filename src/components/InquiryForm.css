@@ -1,90 +1,67 @@
 /* ==========================================================================
-   INQUIRY FORM COMPONENT STYLES
+   CONTACT SECTION & MINIMAL INQUIRY FORM
    ========================================================================== */
 
 .inquiry-section {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-.inquiry-header {
-  max-width: 800px;
-  margin-bottom: 3.5rem;
-}
-
-.inquiry-title {
-  margin-bottom: 0.75rem;
-}
-
-.inquiry-subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-/* 2-Column Grid */
-.inquiry-grid {
+.inquiry-layout {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
   align-items: flex-start;
 }
 
-/* Left: Form Card */
-.inquiry-form-card {
+/* Form Container */
+.inquiry-form-container {
   background-color: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: 2px;
   padding: clamp(1.75rem, 4vw, 3rem);
+  box-shadow: var(--shadow-card);
 }
 
-.wedding-form {
+.minimal-wedding-form {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
-.form-field {
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .field-label {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
-.field-label .req {
-  color: var(--color-accent);
+  color: var(--text-primary);
 }
 
 .field-input,
 .field-textarea {
   width: 100%;
-  background-color: rgba(10, 10, 13, 0.7);
-  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-medium);
   border-radius: 2px;
   padding: 0.85rem 1rem;
-  color: var(--text-primary);
   font-family: var(--font-sans);
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color var(--transition-fast), background-color var(--transition-fast);
-}
-
-.field-input::placeholder,
-.field-textarea::placeholder {
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .field-input:focus,
 .field-textarea:focus {
+  outline: none;
   border-color: var(--color-accent);
-  background-color: rgba(18, 18, 24, 0.9);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
 }
 
 .field-textarea {
@@ -92,199 +69,134 @@
   min-height: 110px;
 }
 
-.form-field.error .field-input,
-.form-field.error .field-textarea {
-  border-color: #d9534f;
-}
-
-.field-error-text {
+.field-error {
   font-family: var(--font-sans);
   font-size: 0.75rem;
-  color: #d9534f;
+  color: #B44A4A;
 }
 
-.form-submit-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding-top: 0.5rem;
+.has-error .field-input,
+.has-error .field-textarea {
+  border-color: #B44A4A;
 }
 
-.form-privacy-hint {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-}
-
-/* Success Confirmation Box */
-.inquiry-success-box {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.success-icon-wrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background-color: rgba(103, 185, 140, 0.12);
-  border: 1px solid #67b98c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.success-icon {
-  color: #67b98c;
-}
-
-.success-heading {
-  color: var(--text-primary);
-}
-
-.success-text {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-}
-
-.demo-notice {
-  padding: 1.15rem;
-  background-color: rgba(200, 168, 107, 0.08);
-  border: 1px solid var(--border-accent);
-  border-radius: 2px;
-}
-
-.demo-notice p {
-  font-family: var(--font-sans);
-  font-size: 0.825rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.success-action-row {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: flex-start;
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
   margin-top: 0.5rem;
 }
 
-.reset-btn {
-  background: none;
-  border: none;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0;
-  transition: color var(--transition-fast);
-}
-
-.reset-btn:hover {
-  color: var(--color-accent);
-}
-
-/* Right: Contact Card */
-.inquiry-contact-card {
-  padding: clamp(1.75rem, 4vw, 2.75rem);
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 2px;
+/* Success State */
+.inquiry-success-state {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  gap: 1rem;
 }
 
-.contact-card-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
+.success-icon {
   color: var(--color-accent);
 }
 
-.contact-card-title {
+.success-title {
   color: var(--text-primary);
-  line-height: 1.25;
 }
 
-.contact-card-text {
+.success-msg {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  font-size: 0.88rem;
-  line-height: 1.6;
 }
 
-.contact-methods {
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Direct Concierge Column */
+.inquiry-direct-info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+}
+
+.direct-title {
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.direct-desc {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.direct-links-list {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding: 1.25rem 0;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 2.5rem;
 }
 
-.contact-method-item {
+.direct-link-item {
   display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
   text-decoration: none;
+  transition: all var(--transition-fast);
 }
 
-.contact-method-icon {
+.direct-link-item:hover {
+  border-color: var(--color-accent);
+  transform: translateX(3px);
+}
+
+.direct-link-icon {
   color: var(--color-accent);
   flex-shrink: 0;
-  margin-top: 0.15rem;
 }
 
-.contact-method-label {
+.direct-link-label {
   display: block;
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  letter-spacing: 0.18em;
-  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
   margin-bottom: 0.2rem;
 }
 
-.contact-method-val {
+.direct-link-value {
+  display: block;
   font-family: var(--font-sans);
-  font-size: 0.925rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: var(--text-primary);
-  transition: color var(--transition-fast);
 }
 
-.contact-method-item:hover .contact-method-val {
-  color: var(--color-accent);
-}
-
-.contact-quote {
-  padding-left: 1rem;
-  border-left: 1px solid var(--border-accent);
-}
-
-.contact-quote p {
+.confidentiality-note {
+  font-family: var(--font-serif);
   font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-muted);
   line-height: 1.5;
 }
 
-/* Responsive Inquiry */
-@media (max-width: 900px) {
-  .inquiry-grid {
+/* Responsive */
+@media (max-width: 860px) {
+  .inquiry-layout {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .form-submit-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .form-submit-row .btn {
-    width: 100%;
   }
 }

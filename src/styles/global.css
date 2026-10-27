@@ -27,6 +27,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
 /* Custom Text Highlight Color */
@@ -44,46 +45,48 @@ body {
   max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
+  padding-left: var(--container-padding, 1rem);
+  padding-right: var(--container-padding, 1rem);
 }
 
+/* Compact, restrained vertical rhythm */
 .section-padding {
-  padding-top: clamp(4rem, 8vw, 7.5rem);
-  padding-bottom: clamp(4rem, 8vw, 7.5rem);
+  padding-top: clamp(3.5rem, 6vw, 5.5rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
 }
 
 /* Editorial Serif Headlines */
 .heading-hero {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 6.5vw, 5.25rem);
+  font-size: clamp(2.4rem, 6vw, 5rem);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.015em;
   color: var(--text-primary);
 }
 
 .heading-section {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-size: clamp(1.85rem, 4vw, 3rem);
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.18;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .heading-sub {
   font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
-  font-weight: 400;
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-weight: 500;
   line-height: 1.3;
   color: var(--text-primary);
 }
 
-/* Subtle Champagne Italic Accent */
+/* Refined Accent Italic */
 .text-italic-accent {
   font-style: italic;
-  font-weight: 300;
-  color: var(--color-accent-light);
+  font-weight: 400;
+  color: var(--color-accent);
 }
 
 /* Small Editorial Section Eyebrow */
@@ -96,18 +99,18 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-accent);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .section-eyebrow::before {
   content: '';
   display: inline-block;
-  width: 20px;
+  width: 22px;
   height: 1px;
   background-color: var(--color-accent);
 }
 
-/* Clean Button Styles */
+/* Clean Luxury Button Styles */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -115,9 +118,9 @@ body {
   gap: 0.6rem;
   padding: 0.85rem 1.85rem;
   font-family: var(--font-sans);
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 2px;
@@ -131,24 +134,29 @@ body {
   color: var(--text-inverse);
   border-color: var(--color-accent);
   font-weight: 600;
+  box-shadow: 0 4px 16px var(--color-accent-glow);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-accent-light);
-  border-color: var(--color-accent-light);
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  color: var(--text-inverse);
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--color-accent-glow);
 }
 
 .btn-secondary {
-  background-color: rgba(23, 23, 29, 0.7);
+  background-color: var(--bg-card);
   color: var(--text-primary);
   border-color: var(--border-medium);
+  box-shadow: var(--shadow-card);
 }
 
 .btn-secondary:hover {
-  background-color: rgba(31, 31, 38, 0.9);
+  background-color: var(--bg-card-hover);
   border-color: var(--color-accent);
-  color: var(--color-accent-light);
+  color: var(--color-accent);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
@@ -160,9 +168,10 @@ body {
 .btn-outline:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
+  background-color: rgba(184, 155, 114, 0.08);
 }
 
-/* Media Placeholder Boxes (For when you haven't uploaded images yet) */
+/* Media Placeholder Boxes */
 .media-placeholder {
   position: relative;
   background-color: var(--placeholder-bg);
@@ -200,6 +209,7 @@ body {
 
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

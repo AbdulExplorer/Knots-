@@ -1,5 +1,6 @@
 /* ==========================================================================
-   NAVBAR COMPONENT STYLES
+   MINIMAL NAVBAR STYLING
+   Brand logo + 5 pure navigation links (Home, Services, Gallery, About, Contact)
    ========================================================================== */
 
 .site-header {
@@ -12,90 +13,55 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid transparent;
-  transition: background-color var(--transition-smooth), border-color var(--transition-smooth);
+  transition: background-color var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
 }
 
-.site-header.scrolled {
-  background-color: rgba(9, 9, 11, 0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+/* Scrolled or Mobile Menu Open */
+.site-header.scrolled,
+.site-header.menu-open {
+  background-color: var(--bg-overlay);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom-color: var(--border-subtle);
+  box-shadow: var(--shadow-nav);
 }
 
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
-/* ==========================================================================
-   EMPTY LOGO AREA
-   Adjust width and height here to match your future logo dimensions!
-   ========================================================================== */
-.logo-placeholder-container {
+/* Brand Logo */
+.brand-logo-link {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-}
-
-.logo-placeholder-container {
-  display: inline-flex;
-  align-items: center;
   flex-shrink: 0;
+  z-index: 1010;
 }
 
 .brand-logo-img {
   display: block;
-  width: 200px;
+  width: 175px;
   max-width: 100%;
-  height: auto;
   object-fit: contain;
-  padding-top: 10px;
-  transition: none;
+  transition: filter var(--transition-smooth), opacity var(--transition-fast);
 }
 
-.brand-logo-img:hover
-{
-  filter: sepia(10) saturate(6) hue-rotate(20deg)
-          brightness(1.1) contrast(1.1);
+/* Over Hero: Drop-shadow for clear contrast over photo */
+.site-header:not(.scrolled):not(.menu-open) .brand-logo-img {
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.75));
 }
 
-
-.empty-logo-box {
-  /* CHANGE THESE DIMENSIONS TO FIT YOUR FUTURE LOGO */
-  width: 150px;
-  height: 42px;
-  border: 1px dashed var(--placeholder-border);
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(20, 20, 25, 0.4);
-  transition: border-color var(--transition-fast);
+/* Scrolled / Menu Open: High contrast against ivory background */
+.site-header.scrolled .brand-logo-img,
+.site-header.menu-open .brand-logo-img {
+  filter: var(--logo-filter);
 }
 
-.empty-logo-box:hover {
-  border-color: var(--color-accent);
-}
-
-.empty-logo-guide {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
-  color: var(--placeholder-text);
-  user-select: none;
-}
-
-/* When you insert an <img> inside .empty-logo-box, this makes it fit cleanly */
-.empty-logo-box img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-/* ==========================================================================
-   DESKTOP NAVIGATION LINKS
-   ========================================================================== */
+/* Desktop Navigation */
 .desktop-nav {
   display: flex;
   align-items: center;
@@ -104,23 +70,42 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   list-style: none;
 }
 
 .nav-link {
   font-family: var(--font-sans);
-  font-size: 0.825rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-secondary);
   text-decoration: none;
-  padding: 0.4rem 0;
+  padding: 0.35rem 0;
   position: relative;
   transition: color var(--transition-fast);
 }
 
+/* Over Hero (transparent state) */
+.site-header:not(.scrolled) .nav-link {
+  color: #F8F5EE;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+.site-header:not(.scrolled) .nav-link:hover {
+  color: #FFFFFF;
+}
+
+/* When Scrolled (ivory state) */
+.site-header.scrolled .nav-link {
+  color: var(--text-secondary);
+}
+
+.site-header.scrolled .nav-link:hover {
+  color: var(--text-primary);
+}
+
+/* Minimal Underline Indicator */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -134,125 +119,139 @@
   transition: transform var(--transition-smooth);
 }
 
-.nav-link:hover {
-  color: var(--text-primary);
-}
-
 .nav-link:hover::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* Header Action & Mobile Hamburger */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.nav-cta-btn {
-  padding: 0.65rem 1.4rem;
-  font-size: 0.75rem;
-}
-
+/* Mobile Hamburger Toggle */
 .mobile-menu-toggle {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid transparent;
   border-radius: 2px;
   cursor: pointer;
+  z-index: 1010;
   transition: all var(--transition-fast);
 }
 
+.site-header:not(.scrolled):not(.menu-open) .mobile-menu-toggle {
+  color: #FFFFFF;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.7));
+}
+
+.site-header.scrolled .mobile-menu-toggle,
+.site-header.menu-open .mobile-menu-toggle {
+  color: var(--text-primary);
+}
+
 .mobile-menu-toggle:hover {
-  border-color: var(--color-accent);
   color: var(--color-accent);
 }
 
-/* ==========================================================================
-   MOBILE DRAWER NAVIGATION
-   ========================================================================== */
-
-   @media (max-width: 480px) {
-  .brand-logo-img {
-    width: 150px;
-  }
-}
-
+/* Mobile Navigation Drawer */
 .mobile-nav-drawer {
   position: fixed;
   inset: 0;
   top: var(--nav-height);
-  background-color: rgba(9, 9, 11, 0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 2rem 1.5rem;
+  background-color: var(--bg-card);
+  padding: 2.5rem 1.75rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 998;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--border-medium);
+  box-shadow: 0 16px 36px rgba(57, 54, 48, 0.08);
 }
 
 .mobile-nav-drawer.open {
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
+}
+
+.mobile-nav-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 3rem;
 }
 
 .mobile-nav-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .mobile-nav-link {
   font-family: var(--font-serif);
-  font-size: 1.85rem;
+  font-size: 1.75rem;
+  font-weight: 400;
   color: var(--text-primary);
   text-decoration: none;
   display: block;
   border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 0.75rem;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), padding-left var(--transition-fast);
 }
 
-.mobile-nav-link:hover {
+.mobile-nav-link:hover,
+.mobile-nav-link:active {
   color: var(--color-accent);
+  padding-left: 0.5rem;
 }
 
 .mobile-nav-footer {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  padding-top: 1.5rem;
 }
 
-.mobile-nav-tagline {
+.mobile-nav-brand-descriptor {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
   color: var(--text-muted);
+  text-transform: uppercase;
+  display: block;
   text-align: center;
 }
 
-.w-full {
-  width: 100%;
-}
-
-/* Mobile Breakpoint */
+/* Responsive Media Queries */
 @media (max-width: 860px) {
-  .desktop-nav,
-  .nav-cta-btn {
+  .desktop-nav {
     display: none;
   }
 
   .mobile-menu-toggle {
     display: inline-flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-logo-img {
+    width: 140px;
+  }
+
+  .site-header {
+    height: 70px;
+  }
+
+  .mobile-nav-drawer {
+    top: 70px;
+    padding: 2rem 1.25rem 2.5rem;
+  }
+
+  .mobile-nav-link {
+    font-size: 1.5rem;
   }
 }

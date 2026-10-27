@@ -9,39 +9,42 @@
 
 .approach-header {
   text-align: center;
-  max-width: 780px;
+  max-width: 800px;
   margin: 0 auto 3.5rem;
 }
 
 .approach-title {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
 .approach-subtitle {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 /* Approach Grid */
 .approach-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .approach-card {
-  padding: 2rem 1.75rem;
+  padding: 2.25rem 1.85rem;
   background-color: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 2px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  transition: border-color var(--transition-fast), transform var(--transition-fast);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
 .approach-card:hover {
-  border-color: var(--border-accent);
-  transform: translateY(-2px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
 }
 
 .approach-card-top {
@@ -49,7 +52,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -58,31 +61,34 @@
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--color-accent);
+  letter-spacing: 0.12em;
 }
 
 .step-roman {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--text-muted);
+  font-size: 1.35rem;
+  color: var(--color-accent-secondary);
+  font-style: italic;
 }
 
 .step-title {
   color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
   line-height: 1.25;
 }
 
 .step-tagline {
-  font-size: 0.85rem;
-  margin-bottom: 1rem;
-  line-height: 1.4;
+  font-size: 0.88rem;
+  margin-bottom: 1.15rem;
+  line-height: 1.45;
+  color: var(--color-accent);
 }
 
 .step-desc {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-top: auto;
 }
 
@@ -90,11 +96,17 @@
 @media (max-width: 1024px) {
   .approach-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 600px) {
   .approach-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .approach-card {
+    padding: 1.75rem 1.5rem;
   }
 }
