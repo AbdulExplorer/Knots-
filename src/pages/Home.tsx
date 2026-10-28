@@ -20,10 +20,10 @@ export const Home: React.FC = () => {
         <Hero />
 
         {/* 3. Services: Photography-Focused Grid with Short Titles */}
-        <Services />
+        {/* <Services /> */}
 
         {/* 4. Gallery: Curated Archive of Wedding Photography */}
-        <Gallery />
+        {/* <Gallery /> */}
 
         {/* 5. About: Story, Philosophy & Atelier Direction */}
         <About />

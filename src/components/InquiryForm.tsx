@@ -215,7 +215,7 @@ export const InquiryForm: React.FC = () => {
                 <InstagramIcon size={18} className="direct-link-icon" />
                 <div>
                   <span className="direct-link-label">Instagram</span>
-                  <span className="direct-link-value">@knotsbydevajain</span>
+                  <span className="direct-link-value">@knottss.co</span>
                 </div>
               </a>
 
