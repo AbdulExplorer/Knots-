@@ -1,8 +1,8 @@
 import React from "react";
 import { Navbar } from "../components/Navbar";
 import { Hero } from "../components/Hero";
-import { Services } from "../components/Services";
-import { Gallery } from "../components/Gallery";
+// import { Services } from "../components/Services";
+// import { Gallery } from "../components/Gallery";
 import { About } from "../components/About";
 import { InquiryForm } from "../components/InquiryForm";
 import { Footer } from "../components/Footer";
