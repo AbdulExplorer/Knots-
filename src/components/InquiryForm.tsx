@@ -3,6 +3,27 @@ import { siteConfig } from "../config/siteConfig";
 import { Send, MessageCircle, CheckCircle, Phone, Mail } from "lucide-react";
 import "./InquiryForm.css";
 
+const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({
+  size = 18,
+  className = "",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
 interface FormData {
   name: string;
   phone: string;
@@ -184,6 +205,20 @@ export const InquiryForm: React.FC = () => {
             </p>
 
             <div className="direct-links-list">
+
+              <a
+                href="https://www.instagram.com/knottss.co?rpxt=MW1rb2ZkeXkzMDA2OA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="direct-link-item"
+              >
+                <InstagramIcon size={18} className="direct-link-icon" />
+                <div>
+                  <span className="direct-link-label">Instagram</span>
+                  <span className="direct-link-value">@knotsbydevajain</span>
+                </div>
+              </a>
+
               <a
                 href={`https://wa.me/${contact.whatsappNumber.replace(/[^0-9]/g, "")}`}
                 target="_blank"
@@ -220,6 +255,6 @@ export const InquiryForm: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 };
