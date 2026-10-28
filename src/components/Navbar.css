@@ -156,25 +156,35 @@
 /* Mobile Navigation Drawer */
 .mobile-nav-drawer {
   position: fixed;
-  inset: 0;
   top: var(--nav-height);
-  background-color: var(--bg-card);
-  padding: 2.5rem 1.75rem 3rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(100vh - var(--nav-height));
+  height: calc(100dvh - var(--nav-height));
+  background-color: var(--bg-primary);
+  padding: 2.25rem 1.75rem 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  z-index: 998;
+  transform: translateY(-10px);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.28s ease;
+  z-index: 999;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   border-bottom: 1px solid var(--border-medium);
-  box-shadow: 0 16px 36px rgba(57, 54, 48, 0.08);
+  box-shadow: 0 20px 40px rgba(57, 54, 48, 0.12);
 }
 
 .mobile-nav-drawer.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
 }
@@ -182,48 +192,112 @@
 .mobile-nav-content {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
   justify-content: space-between;
-  height: 100%;
-  gap: 3rem;
+  gap: 2.25rem;
 }
 
 .mobile-nav-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-links li {
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .mobile-nav-link {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
-  font-weight: 400;
   color: var(--text-primary);
   text-decoration: none;
-  display: block;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0;
   transition: color var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.mobile-nav-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--color-accent);
+}
+
+.mobile-nav-text {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 400;
+  color: inherit;
+  letter-spacing: -0.01em;
 }
 
 .mobile-nav-link:hover,
 .mobile-nav-link:active {
   color: var(--color-accent);
-  padding-left: 0.5rem;
+  padding-left: 0.4rem;
 }
 
 .mobile-nav-footer {
-  padding-top: 1.5rem;
+  margin-top: auto;
+  padding-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.mobile-nav-cta {
+  width: 100%;
+  text-align: center;
+  padding: 0.9rem 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+}
+
+.mobile-nav-contact-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.mobile-nav-contact-item {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.mobile-nav-contact-item:hover {
+  color: var(--color-accent);
+}
+
+.mobile-nav-separator {
+  color: var(--color-accent);
+  font-size: 0.75rem;
 }
 
 .mobile-nav-brand-descriptor {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.16em;
   color: var(--text-muted);
   text-transform: uppercase;
   display: block;
   text-align: center;
+  line-height: 1.5;
+}
+
+/* Hide mobile drawer on desktop screens */
+@media (min-width: 861px) {
+  .mobile-nav-drawer {
+    display: none !important;
+  }
 }
 
 /* Responsive Media Queries */
@@ -248,10 +322,21 @@
 
   .mobile-nav-drawer {
     top: 70px;
-    padding: 2rem 1.25rem 2.5rem;
+    height: calc(100vh - 70px);
+    height: calc(100dvh - 70px);
+    padding: 1.75rem 1.25rem 2rem;
+  }
+
+  .mobile-nav-text {
+    font-size: 1.45rem;
   }
 
   .mobile-nav-link {
-    font-size: 1.5rem;
+    padding: 0.9rem 0;
+  }
+
+  .mobile-nav-footer {
+    padding-top: 1.25rem;
+    gap: 1rem;
   }
 }

@@ -172,7 +172,7 @@ export const siteConfig: SiteConfig = {
     quote: "Every wedding is an enduring work of art, sculpted with devotion and lived with joy.",
     founder: "Deva Jain",
     founderTitle: "Founder",
-    imageSrc: "/images/wedding-journey/f11.png",
+    imageSrc: "/images/wedding-journey/DevaJain.png",
   },
 
   contact: {

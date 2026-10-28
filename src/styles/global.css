@@ -219,3 +219,19 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove default focus outline */
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
