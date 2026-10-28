@@ -69,15 +69,34 @@ export const InquiryForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    try {
+      await fetch(`https://formsubmit.co/ajax/${contact.email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          "Client Name": formData.name,
+          "Phone / WhatsApp": formData.phone,
+          "Wedding Vision & Notes": formData.notes,
+          _subject: `New Wedding Inquiry from ${formData.name} — KNOTS Atelier`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+    } catch (err) {
+      console.warn("Email dispatch error:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    }
   };
 
   const getWhatsAppLink = () => {
@@ -107,9 +126,9 @@ export const InquiryForm: React.FC = () => {
             {isSubmitted ? (
               <div className="inquiry-success-state" role="status">
                 <CheckCircle size={32} className="success-icon" />
-                <h3 className="success-title heading-sub">Inquiry Recorded</h3>
+                <h3 className="success-title heading-sub">Inquiry Dispatched</h3>
                 <p className="success-msg">
-                  Thank you, <strong>{formData.name}</strong>. Your wedding inquiry has been recorded.
+                  Thank you, <strong>{formData.name}</strong>. Your inquiry has been sent directly to our atelier desk ({contact.email}). We will reach out shortly.
                 </p>
                 <div className="success-actions">
                   <a
@@ -119,7 +138,7 @@ export const InquiryForm: React.FC = () => {
                     className="btn btn-primary"
                   >
                     <MessageCircle size={16} />
-                    <span>SEND DIRECTLY VIA WHATSAPP</span>
+                    <span>CONNECT ALSO VIA WHATSAPP</span>
                   </a>
                   <button
                     type="button"

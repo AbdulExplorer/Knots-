@@ -1,0 +1,172 @@
+/* ==========================================================================
+   OUR HOSPITALITY PARTNERS — MINIMAL LUXURY LOGO MARQUEE
+   KNOTS by Deva Jain
+   ========================================================================== */
+
+.hospitality-partners-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-top: clamp(10rem, 4vw, 15rem);
+  padding-bottom: clamp(10rem, 4vw, 15rem);
+  overflow: hidden;
+}
+
+/* Subtle, understated editorial section heading */
+.partners-header {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.25rem);
+  padding: 0 var(--container-padding, 1rem);
+}
+
+.partners-heading {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 0.85vw, 0.78rem);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Marquee viewport container with gentle edge fade masks */
+.partners-marquee-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  /* Smooth luxury edge fade */
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 6%,
+      black 94%,
+      transparent 100%);
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 6%,
+      black 94%,
+      transparent 100%);
+}
+
+/* Continuous animation track */
+.partners-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: marqueeRightToLeft 45s linear infinite;
+  will-change: transform;
+}
+
+/* Pause animation on hover or when focused */
+.partners-marquee-container:hover .partners-marquee-track,
+.partners-marquee-container:focus-within .partners-marquee-track {
+  animation-play-state: paused;
+}
+
+/*
+  Seamless right-to-left marquee animation:
+  Translates by -50%, which shifts exactly 2 of the 4 groups.
+  Since groups 3 and 4 are identical to groups 1 and 2,
+  the reset to 0% creates an invisible, seamless, jump-free loop.
+*/
+@keyframes marqueeRightToLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Flex group of partner logos */
+.partners-marquee-group {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  padding-right: clamp(2.5rem, 5vw, 5rem);
+  flex-shrink: 0;
+}
+
+/* Individual partner logo wrapper */
+.partner-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Fixed height, auto width, contain aspect ratio */
+.partner-logo-img {
+  display: block;
+  height: clamp(32px, 3.8vw, 44px);
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  opacity: 0.85;
+  filter: grayscale(10%) contrast(1.05);
+  transition: opacity var(--transition-fast, 0.2s ease),
+    filter var(--transition-fast, 0.2s ease),
+    transform var(--transition-fast, 0.2s ease);
+}
+
+.partner-logo-item:hover .partner-logo-img {
+  opacity: 1;
+  filter: grayscale(0%) contrast(1);
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: PREFERS REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .partners-marquee-container {
+    mask-image: none;
+    -webkit-mask-image: none;
+    overflow-x: auto;
+  }
+
+  .partners-marquee-track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  /* Hide decorative duplicate groups when motion is reduced */
+  .partners-marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+
+  .partners-marquee-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+  }
+}
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE TUNING
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hospitality-partners-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .partners-marquee-track {
+    animation-duration: 35s;
+  }
+
+  .partners-logo-img {
+    height: 28px;
+    max-width: 120px;
+  }
+}

@@ -41,6 +41,20 @@ export interface SiteConfig {
     }>;
   };
 
+  testimonials: {
+    title: string;
+    subtitle: string;
+    autoSlideIntervalMs?: number;
+    items: Array<{
+      id: string;
+      quote: string;
+      coupleNames?: string;
+      weddingLocation?: string;
+      weddingYear?: string;
+      imageSrc?: string;
+    }>;
+  };
+
   about: {
     title: string;
     tagline: string;
@@ -59,6 +73,17 @@ export interface SiteConfig {
     phone: string;
     whatsappMessage: string;
     successMessage: string;
+  };
+
+  hospitalityPartners: {
+    heading: string;
+    items: Array<{
+      id: string;
+      name: string;
+      logoSrc: string;
+      logoWidth?: number;
+      logoHeight?: number;
+    }>;
   };
 }
 
@@ -164,6 +189,57 @@ export const siteConfig: SiteConfig = {
     ],
   },
 
+  testimonials: {
+    title: "Kind Words",
+    subtitle: "Memories that mean the world to us.",
+    autoSlideIntervalMs: 6000,
+    /**
+     * Client Testimonials Array.
+     * Kept empty until real client reviews, couple names, and wedding locations
+     * are provided and explicitly approved for publication.
+     *
+     * Example structure to populate:
+     * {
+     *   id: "couple-1",
+     *   quote: "Every moment was orchestrated with quiet magnificence and profound attention to detail.",
+     *   coupleNames: "Ananya & Kabir",
+     *   weddingLocation: "Udaipur, Rajasthan",
+     *   weddingYear: "2025",
+     *   imageSrc: "/images/wedding-journey/h1.jpg", // optional couple photo
+     * }
+     */
+    items: [
+
+      {
+        id: "couple-1",
+        quote: "Every moment was orchestrated with quiet magnificence and profound attention to detail.",
+        coupleNames: "Ananya & Kabir",
+        weddingLocation: "Udaipur, Rajasthan",
+        weddingYear: "2025",
+        imageSrc: "/images/wedding-journey/h1.jpg", // optional couple photo
+      },
+
+      {
+        id: "couple-2",
+        quote: "Every moment was orchestrated with quiet magnificence and profound attention to detail.",
+        coupleNames: "Ananya & Kabir",
+        weddingLocation: "Udaipur, Rajasthan",
+        weddingYear: "2025",
+        imageSrc: "/images/wedding-journey/h2.jpg", // optional couple photo
+      },
+
+      {
+        id: "couple-3",
+        quote: "Every moment was orchestrated with quiet magnificence and profound attention to detail.",
+        coupleNames: "Ananya & Kabir",
+        weddingLocation: "Udaipur, Rajasthan",
+        weddingYear: "2025",
+        imageSrc: "/images/wedding-journey/h3.jpg", // optional couple photo
+      },
+
+    ],
+  },
+
   about: {
     title: "About",
     tagline: "Devoted Exclusively to Weddings",
@@ -178,10 +254,24 @@ export const siteConfig: SiteConfig = {
   contact: {
     title: "Contact",
     subtitle: "We accept a limited number of commissions each season to ensure absolute devotion.",
-    email: "concierge@knotsbydevajain.com",
+    email: "abdulali0407@gmail.com",
     whatsappNumber: "+91 8871820868",
     phone: "+91 8871820868",
     whatsappMessage: "Hello Knots by Deva Jain team, I would like to inquire about wedding planning services.",
     successMessage: "Thank you! We have received your wedding inquiry and will reach out within 24 hours.",
+  },
+
+  hospitalityPartners: {
+    heading: "OUR HOSPITALITY PARTNERS",
+    items: [
+      { id: "jehan-numa", name: "Jehan Numa", logoSrc: "/images/Logo/L1.png", logoWidth: 200, logoHeight: 150, },
+      { id: "graces-resorts", name: "Graces Resorts", logoSrc: "/images/Logo/L2.png", logoWidth: 200, logoHeight: 150, },
+      { id: "utopia-resort", name: "Utopia Resort", logoSrc: "/images/Logo/L3.png", logoWidth: 200, logoHeight: 150, },
+      { id: "crescent-resort", name: "Crescent Resort & Club", logoSrc: "/images/Logo/L4.png", logoWidth: 200, logoHeight: 150, },
+      { id: "playotel-resort", name: "Playotel Resort", logoSrc: "/images/Logo/L5.png", logoWidth: 200, logoHeight: 150, },
+      { id: "zuper-hotels", name: "Zuper Hotels & Resorts", logoSrc: "/images/Logo/L6.png", logoWidth: 200, logoHeight: 150, },
+      { id: "courtyard-marriott", name: "Courtyard by Marriott", logoSrc: "/images/Logo/L7.png", logoWidth: 200, logoHeight: 150, },
+      { id: "pebbles-resort", name: "Pebbles Resort", logoSrc: "/images/Logo/L8.png", logoWidth: 200, logoHeight: 150, },
+    ],
   },
 };
