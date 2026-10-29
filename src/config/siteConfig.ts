@@ -73,6 +73,7 @@ export interface SiteConfig {
     phone: string;
     whatsappMessage: string;
     successMessage: string;
+    web3FormsAccessKey?: string;
   };
 
   hospitalityPartners: {
@@ -254,11 +255,12 @@ export const siteConfig: SiteConfig = {
   contact: {
     title: "Contact",
     subtitle: "We accept a limited number of commissions each season to ensure absolute devotion.",
-    email: "abdulali0407@gmail.com",
+    email: "softwarestudiobhopal@gmail.com",
     whatsappNumber: "+91 8871820868",
     phone: "+91 8871820868",
     whatsappMessage: "Hello Knots by Deva Jain team, I would like to inquire about wedding planning services.",
     successMessage: "Thank you! We have received your wedding inquiry and will reach out within 24 hours.",
+    web3FormsAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "",
   },
 
   hospitalityPartners: {
