@@ -260,7 +260,7 @@ export const siteConfig: SiteConfig = {
     phone: "+91 8871820868",
     whatsappMessage: "Hello Knots by Deva Jain team, I would like to inquire about wedding planning services.",
     successMessage: "Thank you! We have received your wedding inquiry and will reach out within 24 hours.",
-    web3FormsAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "",
+    web3FormsAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "5be7b291-ed95-4f14-a551-90ec1f48da1c",
   },
 
   hospitalityPartners: {
